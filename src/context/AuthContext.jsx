@@ -1,12 +1,14 @@
 import React, { useContext, useState, createContext, useEffect } from "react";
 import { supabase } from "../services/supabaseClient";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [session, setSession] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getInitialSession = async () => {
@@ -19,16 +21,23 @@ export const AuthProvider = ({ children }) => {
     getInitialSession();
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      (event, session) => {
         setSession(session);
-        setUser(session?.user ?? null);
+        const currentUser = session?.user ?? null;
+        setUser(currentUser);
+        setLoading(false);
+        
+        if (event === "PASSWORD_RECOVERY") {
+          console.log("Password recovery event detected, navigating to reset page.");
+          navigate("/reset-password");
+        }
       }
     );
 
     return () => {
       authListener.subscription.unsubscribe();
     };
-  }, []);
+  }, [navigate]);
 
   const logout = async () => {
     await supabase.auth.signOut();
