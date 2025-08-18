@@ -22,14 +22,19 @@ export const AuthProvider = ({ children }) => {
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        setSession(session);
-        const currentUser = session?.user ?? null;
-        setUser(currentUser);
         setLoading(false);
-        
+        const currentUser = session?.user ?? null;
+
         if (event === "PASSWORD_RECOVERY") {
-          console.log("Password recovery event detected, navigating to reset page.");
+          setSession(session);
+          setUser(currentUser);
           navigate("/reset-password");
+        } else if (session) {
+          setSession(session);
+          setUser(currentUser);
+        } else {
+          setSession(null);
+          setUser(null);
         }
       }
     );
