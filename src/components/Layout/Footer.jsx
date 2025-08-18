@@ -13,12 +13,22 @@ import {
 import '../../styles/Footer.css';
 import logo from '../../assets/logo.png';
 import '../../styles/font.css';
+import { useNavigate } from 'react-router-dom';
 
 const { Footer: AntFooter } = Layout;
 const { Title, Text } = Typography;
 const { Search } = Input;
 
 const Footer = () => {
+  const navigate = useNavigate()
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
   return (
     <AntFooter style={{
       background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
@@ -33,8 +43,8 @@ const Footer = () => {
         width: '100%'
       }}>
         {/* Logo Section with Tagline */}
-        <div style={{ 
-          textAlign: 'center', 
+        <div style={{
+          textAlign: 'center',
           marginBottom: '30px',
           paddingBottom: '20px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
@@ -59,12 +69,12 @@ const Footer = () => {
             margin: '0 auto',
             lineHeight: '1.6'
           }}>
-            ارائه کننده بهترین تجربه‌های اقامتی در سراسر ایران
+            ارائه کننده بهترین تجربه‌های اقامتی در شمال ایران
           </Text>
         </div>
 
         {/* Main Footer Content */}
-        <Row 
+        <Row
           gutter={[
             { xs: 20, sm: 30, md: 40 },
             { xs: 30, sm: 30, md: 40 }
@@ -133,15 +143,20 @@ const Footer = () => {
               gap: '12px'
             }}>
               {[
-                { name: 'صفحه اصلی', icon: '🏠' },
-                { name: 'ویلاها', icon: '🏡' },
-                { name: 'هتل‌ها', icon: '🏨' },
-                { name: 'آپارتمان‌ها', icon: '🏢' },
-                { name: 'تجربه‌های منحصر به فرد', icon: '✨' }
+                { name: 'صفحه اصلی', icon: '🏠', path: '/' },
+                { name: 'هتل‌ها', icon: '🏨', path: '/hotels' },
+                { name: 'درباره ما', icon: 'ℹ️', path: '/about' },
+                { name: 'تماس با ما', icon: '📞', path: '/contact' },
+                { name: 'ورود', icon: '🔑', path: '/login' },
+                { name: 'ثبت نام', icon: '📝', path: '/register' }
               ].map((item) => (
-                <a 
-                  key={item.name} 
+                <a
+                  key={item.name}
                   href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavigation(item.path);
+                  }}
                   style={{
                     color: 'rgba(255,255,255,0.75)',
                     fontSize: '14px',
@@ -188,8 +203,8 @@ const Footer = () => {
               ارتباط با ما
             </Title>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              <div style={{ 
-                display: 'flex', 
+              <div style={{
+                display: 'flex',
                 alignItems: 'center',
                 backgroundColor: 'rgba(255,255,255,0.05)',
                 padding: '12px',
@@ -217,9 +232,9 @@ const Footer = () => {
                   ۰۲۱-۱۲۳۴۵۶۷۸
                 </Text>
               </div>
-              
-              <div style={{ 
-                display: 'flex', 
+
+              <div style={{
+                display: 'flex',
                 alignItems: 'center',
                 backgroundColor: 'rgba(255,255,255,0.05)',
                 padding: '12px',
@@ -247,9 +262,9 @@ const Footer = () => {
                   info@hotelyar.com
                 </Text>
               </div>
-              
-              <div style={{ 
-                display: 'flex', 
+
+              <div style={{
+                display: 'flex',
                 alignItems: 'center',
                 backgroundColor: 'rgba(255,255,255,0.05)',
                 padding: '12px',
@@ -318,13 +333,13 @@ const Footer = () => {
                 <span style={{ fontFamily: 'Vazir' }}>عضویت</span>
               }
               size="large"
-              style={{ 
+              style={{
                 marginBottom: '25px',
                 direction: 'ltr'
               }}
               onSearch={value => console.log(value)}
             />
-            
+
             <Text style={{
               color: 'white',
               fontSize: '16px',
@@ -334,8 +349,8 @@ const Footer = () => {
             }}>
               ما را دنبال کنید
             </Text>
-            <div style={{ 
-              display: 'flex', 
+            <div style={{
+              display: 'flex',
               gap: '12px',
               flexWrap: 'wrap'
             }}>
@@ -372,21 +387,21 @@ const Footer = () => {
           </Col>
         </Row>
 
-        <Divider style={{ 
-          borderColor: 'rgba(255,255,255,0.1)', 
-          margin: '40px 0 20px' 
+        <Divider style={{
+          borderColor: 'rgba(255,255,255,0.1)',
+          margin: '40px 0 20px'
         }} />
 
         {/* Copyright Section */}
-            <Text style={{
-              color: 'rgba(255,255,255,0.6)',
-              fontSize: '14px',
-              textAlign: 'center',
-              display: 'block',
-              fontFamily: 'Vazir'
-            }}>
-              © {new Date().getFullYear()}  هتل یار - تمامی حقوق محفوظ است | طراحی و توسعه با تیم طراحی 8968
-            </Text>
+        <Text style={{
+          color: 'rgba(255,255,255,0.6)',
+          fontSize: '14px',
+          textAlign: 'center',
+          display: 'block',
+          fontFamily: 'Vazir'
+        }}>
+          © {new Date().getFullYear()}  هتل یار - تمامی حقوق محفوظ است | طراحی و توسعه با تیم طراحی ALVAND
+        </Text>
       </div>
     </AntFooter>
   );
