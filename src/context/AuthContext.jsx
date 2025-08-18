@@ -11,30 +11,21 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getInitialSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    };
-
-    getInitialSession();
-
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        setLoading(false);
+        setSession(session);
         const currentUser = session?.user ?? null;
+        setUser(currentUser);
+        setLoading(false);
 
+        // ۲. منطق کلیدی و جدید
         if (event === "PASSWORD_RECOVERY") {
-          setSession(session);
-          setUser(currentUser);
+          setIsPasswordRecovery(true); // وضعیت بازیابی را فعال می‌کنیم
           navigate("/reset-password");
-        } else if (session) {
-          setSession(session);
-          setUser(currentUser);
-        } else {
-          setSession(null);
-          setUser(null);
+        } else if (event === "SIGNED_IN") {
+          setIsPasswordRecovery(false); // با ورود عادی، وضعیت بازیابی را غیرفعال می‌کنیم
+        } else if (event === "SIGNED_OUT") {
+          setIsPasswordRecovery(false);
         }
       }
     );
@@ -66,8 +57,9 @@ export const AuthProvider = ({ children }) => {
   const value = {
     session,
     user: userProfile,
-    isAuthenticated: !!user,
-    logout,
+    isAuthenticated: !!session && session.user.aud === 'authenticated' && !isPasswordRecovery,
+    logout: () => supabase.auth.signOut(),
+    loading,
     hasRole,
     hasAnyRole
   };

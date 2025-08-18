@@ -162,7 +162,7 @@ const Navbar = () => {
         }}
       >
         {/* Logo */}
-        <div className="logo" onClick={() => navigate('/')} style={{ display: 'flex', alignItems: 'center', order: 3 }}>
+        <div className="logo" onClick={() => navigate('/')} style={{ display: 'flex', alignItems: 'center', order: 3,pointerEvents:'none' }}>
           <img
             src={logo}
             alt="جاباما"
