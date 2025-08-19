@@ -95,7 +95,7 @@ const ManageBookings = () => {
       // 3. Handle refund if needed
       if (response.data?.status_booking === 'cancelled_refund_pending') {
         createTransaction({
-          user_id: response.data.user_id,
+          users_id: response.data.users_id,
           reservationId: response.data.id,
           type: 'refund_processed',
           amount: -response.data.totalPrice,
@@ -139,10 +139,10 @@ const ManageBookings = () => {
     }, 1000);
   
       // 2. Handle refund if needed
-      if (values.status === 'cancelled' && selectedBooking.user_id) {
+      if (values.status === 'cancelled' && selectedBooking.users_id) {
         try {
           await createTransaction({
-            user_id: selectedBooking.user_id,
+            users_id: selectedBooking.users_id,
             reservationId: selectedBooking.id,
             type: 'refund_processed',
             amount: -selectedBooking.totalPrice,
@@ -317,8 +317,8 @@ const ManageBookings = () => {
                   <div>
                     <strong style={{ color: 'Highlight', fontSize: '12px' }}>نام مهمان: </strong>
                     <span style={{ fontSize: '12px' }}>
-                      {record?.user?.firstName || 'نامشخص'} {record?.user?.lastName || ''}
-                      {!record?.user?.firstName && !record?.user?.lastName && record.hotelName && record.hotelName}
+                      {record?.users?.firstName || 'نامشخص'} {record?.users?.lastName || ''}
+                      {!record?.users?.firstName && !record?.users?.lastName && record.hotelName && record.hotelName}
                     </span>
                   </div>
                   <div>
@@ -362,9 +362,9 @@ const ManageBookings = () => {
 
                     <Col xs={24} sm={12} md={12}>
                       <Card size="small" title="اطلاعات مهمان" headStyle={{ fontSize: '12px' }} bodyStyle={{ padding: '8px' }}>
-                        <p style={{ marginBottom: '8px', fontSize: '12px' }}>نام: {record.user?.firstName || 'نامشخص'} {record.user?.lastName || ''}</p>
-                        <p style={{ marginBottom: '8px', fontSize: '12px' }}>ایمیل: {record.user?.email || "نامشخص"}</p>
-                        <p style={{ marginBottom: '0', fontSize: '12px' }}>تلفن: {record.user?.phoneNumber || "نامشخص"}</p>
+                        <p style={{ marginBottom: '8px', fontSize: '12px' }}>نام: {record.users?.firstName || 'نامشخص'} {record.users?.lastName || ''}</p>
+                        <p style={{ marginBottom: '8px', fontSize: '12px' }}>ایمیل: {record.users?.email || "نامشخص"}</p>
+                        <p style={{ marginBottom: '0', fontSize: '12px' }}>تلفن: {record.users?.phoneNumber || "نامشخص"}</p>
                       </Card>
                     </Col>
                   </Row>
