@@ -417,7 +417,7 @@ export const fetchReservations = async () => {
     .from('reservations')
     .select(`
       *,
-      users ( firstName, lastName, email ),
+      users ( firstName, lastName, email, phoneNumber ),
       hotels ( name )
     `)
     .order('createdAt', { ascending: false });
