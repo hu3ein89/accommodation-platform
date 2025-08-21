@@ -5,8 +5,33 @@ import { Form, Input, Row, Col, Button, message } from 'antd';
 import { ReloadOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
-const FormWrapper = styled.div`
-  margin-top: 24px;
+const CompactFormWrapper = styled.div`
+  margin-top: 12px;
+  
+  .ant-form-item {
+    margin-bottom: 12px;
+  }
+  
+  .ant-form-item-label {
+    padding-bottom: 4px;
+  }
+  
+  .ant-input, .ant-input-password {
+    padding: 6px 11px;
+    font-size: 13px;
+  }
+  
+  .ant-btn {
+    height: 36px;
+    font-size: 13px;
+  }
+`;
+
+const CompactCardContainer = styled.div`
+  transform: scale(0.85);
+  transform-origin: top center;
+  margin-top: -15px;
+  margin-bottom: -10px;
 `;
 
 const generateMathCaptcha = () => {
@@ -18,7 +43,6 @@ const generateMathCaptcha = () => {
     num1 = Math.floor(Math.random() * 10) + 1;
     num2 = Math.floor(Math.random() * num1) + 1;
   } else {
-
     num1 = Math.floor(Math.random() * 10) + 1;
     num2 = Math.floor(Math.random() * 10) + 1;
   }
@@ -33,7 +57,7 @@ const generateMathCaptcha = () => {
   };
 };
 
-const CustomPaymentForm = ({ onPaymentSubmit, isProcessing }) => {
+const CompactPaymentForm = ({ onPaymentSubmit, isProcessing }) => {
   const [cardData, setCardData] = useState({
     number: '',
     expiry: '',
@@ -88,8 +112,8 @@ const CustomPaymentForm = ({ onPaymentSubmit, isProcessing }) => {
   }, [form]);
 
   return (
-    <div>
-      <div style={{direction:'ltr'}}>
+    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+      <CompactCardContainer style={{direction:'ltr'}}>
         <Cards
           number={cardData.number}
           expiry={cardData.expiry}
@@ -99,112 +123,153 @@ const CustomPaymentForm = ({ onPaymentSubmit, isProcessing }) => {
           placeholders={{ name: 'نام شما' }}
           locale={{ valid: 'معتبر تا' }}
         />
-        <FormWrapper>
-          <Form 
-            layout="vertical" 
-            onFinish={onFinish} 
-            form={form}
-            onFinishFailed={() => message.error('لطفا اطلاعات را به درستی وارد کنید')}
-          >
-            <Form.Item label="شماره کارت" required>
-              <Input
-                name="number"
-                placeholder="**** **** **** ****"
-                value={cardData.number}
-                onChange={handleInputChange}
-                onFocus={handleInputFocus}
-                maxLength={16}
-                style={{ direction: 'ltr', textAlign: 'left' }}
-                required
-              />
-            </Form.Item>
-            <Form.Item label="نام دارنده کارت" required>
-              <Input
-                name="name"
-                placeholder="محمد محمدی"
-                value={cardData.name}
-                onChange={handleInputChange}
-                onFocus={handleInputFocus}
-                required
-              />
-            </Form.Item>
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item label="CVV" required>
-                  <Input
-                    name="cvc"
-                    placeholder="123"
-                    value={cardData.cvc}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                    maxLength={4}
-                    required
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="تاریخ انقضا" required>
-                  <Input
-                    name="expiry"
-                    placeholder="MM/YY"
-                    value={cardData.expiry}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                    maxLength={5}
-                    required
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            
-            <Form.Item
-              name="captcha"
-              label={
-                <div style={{ display: 'flex', alignItems: 'center'}}>
-                  <span>حاصل عبارت {captcha.text}</span>
-                  <ReloadOutlined 
-                    onClick={refreshCaptcha} 
-                    style={{ marginRight: 8, cursor: 'pointer', paddingLeft: 8 }}
-                  />
-                </div>
-              }
-              rules={[
-                { required: true, message: 'لطفا حاصل عبارت را وارد کنید' },
-                { validator: validateCaptcha }
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            
-            <Form.Item
-              name="secondPassword"
-              label="رمز دوم اینترنتی"
-              rules={[
-                { required: true, message: 'لطفا رمز دوم را وارد کنید' },
-                { len: 6, message: 'رمز دوم باید 6 رقمی باشد' },
-                { pattern: /^\d+$/, message: 'رمز دوم باید عددی باشد' }
-              ]}
-            >
-              <Input.Password maxLength={6} />
-            </Form.Item>
-            
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                size="large"
-                block
-                loading={isProcessing}
-                disabled={isProcessing}
+      </CompactCardContainer>
+      
+      <CompactFormWrapper>
+        <Form 
+          layout="vertical" 
+          onFinish={onFinish} 
+          form={form}
+          onFinishFailed={() => message.error('لطفا اطلاعات را به درستی وارد کنید')}
+          autoComplete="off"
+        >
+          {/* Hidden fake fields to prevent autofill */}
+          <div style={{ display: 'none' }}>
+            <input type="text" name="fakeusername" autoComplete="username" />
+            <input type="password" name="fakepassword" autoComplete="new-password" />
+            <input type="text" name="fakecardnumber" autoComplete="cc-number" />
+            <input type="text" name="fakecvv" autoComplete="cc-csc" />
+            <input type="text" name="fakeexpiry" autoComplete="cc-exp" />
+          </div>
+
+          <Row gutter={8}>
+            <Col span={16}>
+              <Form.Item label="شماره کارت" required>
+                <Input
+                  name="number"
+                  placeholder="**** **** **** ****"
+                  value={cardData.number}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                  maxLength={16}
+                  style={{ direction: 'ltr', textAlign: 'left' }}
+                  required
+                  autoComplete="cc-number"
+                  id="credit-card-number"
+                  inputMode="numeric"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label="CVV" required>
+                <Input
+                  name="cvc"
+                  placeholder="123"
+                  value={cardData.cvc}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                  maxLength={4}
+                  required
+                  autoComplete="cc-csc"
+                  id="cvv-number"
+                  inputMode="numeric"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Form.Item label="نام دارنده کارت" required>
+            <Input
+              name="name"
+              placeholder="محمد محمدی"
+              value={cardData.name}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              required
+              autoComplete="cc-name"
+              id="cardholder-name"
+            />
+          </Form.Item>
+          
+          <Row gutter={8}>
+            <Col span={12}>
+              <Form.Item label="تاریخ انقضا" required>
+                <Input
+                  name="expiry"
+                  placeholder="MM/YY"
+                  value={cardData.expiry}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                  maxLength={5}
+                  required
+                  autoComplete="cc-exp"
+                  id="expiry-date"
+                  inputMode="numeric"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="secondPassword"
+                label="رمز دوم اینترنتی"
+                rules={[
+                  { required: true, message: 'لطفا رمز دوم را وارد کنید' },
+                  { len: 6, message: 'رمز دوم باید 6 رقمی باشد' },
+                  { pattern: /^\d+$/, message: 'رمز دوم باید عددی باشد' }
+                ]}
               >
-                {isProcessing ? 'در حال پردازش...' : 'پرداخت'}
-              </Button>
-            </Form.Item>
-          </Form>
-        </FormWrapper>
-      </div>
+                <Input.Password 
+                  maxLength={6} 
+                  autoComplete="new-password"
+                  id="second-password"
+                  name="second-password"
+                  inputMode="numeric"
+                  placeholder="••••••"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          
+          <Form.Item
+            name="captcha"
+            label={
+              <div style={{ display: 'flex', alignItems: 'center'}}>
+                <span>حاصل عبارت {captcha.text}</span>
+                <ReloadOutlined 
+                  onClick={refreshCaptcha} 
+                  style={{ marginRight: 8, cursor: 'pointer', paddingLeft: 8 }}
+                />
+              </div>
+            }
+            rules={[
+              { required: true, message: 'لطفا حاصل عبارت را وارد کنید' },
+              { validator: validateCaptcha }
+            ]}
+          >
+            <Input 
+              autoComplete="off" 
+              id="captcha-input"
+              name="captcha-input"
+              inputMode="numeric"
+              placeholder="پاسخ"
+            />
+          </Form.Item>
+          
+          <Form.Item style={{ marginBottom: 0 }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              loading={isProcessing}
+              disabled={isProcessing}
+            >
+              {isProcessing ? 'در حال پردازش...' : 'پرداخت'}
+            </Button>
+          </Form.Item>
+        </Form>
+      </CompactFormWrapper>
     </div>
   );
 };
 
-export default CustomPaymentForm;
+export default CompactPaymentForm;

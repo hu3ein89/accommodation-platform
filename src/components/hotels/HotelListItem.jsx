@@ -50,6 +50,9 @@ const PriceTag = styled.div`
 const HotelListItem = ({ hotel, onViewDetails }) => {
   const { name, city, rating, price, image, description, facilities = [] } = hotel;
 
+  // Safely handle facilities array - use empty array if null/undefined
+  const safeFacilities = Array.isArray(facilities) ? facilities : [];
+
   return (
     <StyledListItem hoverable onClick={() => onViewDetails(hotel.id)}>
       <Row gutter={[24, 16]} align="middle">
@@ -70,7 +73,7 @@ const HotelListItem = ({ hotel, onViewDetails }) => {
             {description}
           </Paragraph>
           <Space wrap size={[8, 8]}>
-            {facilities.slice(0, 3).map((facility, index) => (
+            {safeFacilities.slice(0, 3).map((facility, index) => (
               <Tag key={index}>{facility}</Tag>
             ))}
           </Space>

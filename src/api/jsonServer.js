@@ -396,14 +396,14 @@ export const fetchHotelDetails = async (hotelId) => {
 
 export const deleteHotel = async (hotelId) => {
   try {
-    const { error } = await supabase
+    const { error } = await supabaseAdmin
       .from('hotels')
       .delete()
       .eq('id', hotelId);
 
     if (error) throw error;
 
-    return { success: true, message: 'Hotel deleted successfully' };
+    return { success: true, message: 'هتل با موفقیت حذف شد' };
   } catch (error) {
     console.error('Delete Hotel Error:', error);
     throw new Error('خطا در حذف هتل');
@@ -604,7 +604,7 @@ export const deleteReservation = async (reservationId) => {
       .single();
 
     if (fetchError || !reservation) {
-      throw new Error(fetchError?.message || 'Reservation not found');
+      throw new Error(fetchError?.message || 'رزرو ورد نظر یافت نشد');
     }
 
     
@@ -631,7 +631,7 @@ export const deleteReservation = async (reservationId) => {
       .maybeSingle();
 
     if (verifyData) {
-      throw new Error('Deletion verification failed');
+      throw new Error('تایید حذف نا موفق بود');
     }
 
     return {
@@ -642,7 +642,7 @@ export const deleteReservation = async (reservationId) => {
 
   } catch (error) {
     console.error('Delete reservation error:', error);
-    throw new Error(`Failed to delete reservation: ${error.message}`);
+    throw new Error(`حدف رزرو انجام نشد: ${error.message}`);
   }
 };
 

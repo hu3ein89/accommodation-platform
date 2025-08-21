@@ -107,7 +107,7 @@ const ManageBookings = () => {
       }
   
       notification.success({
-        message: "Success",
+        message: "موفق",
         description: "رزرو مورد نظر با موفقیت حذف شد"
       });
     },

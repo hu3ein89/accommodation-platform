@@ -404,7 +404,7 @@ const ManageTransactions = () => {
           style={{ 
             margin: 0,
             display: screens.md ? 'block' : 'none', 
-            textAlign: 'center' 
+            textAlign: 'right' 
           }}>
             <DollarOutlined />
             <span>مدیریت تراکنش‌ها</span>
