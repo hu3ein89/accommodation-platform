@@ -1,7 +1,7 @@
 # HotelYar - پلتفرم جامع رزرواسیون اقامتگاه
 
 <div align="center">
-  <img src="https://i.imgur.com/your-project-banner-or-screenshot.png" alt="Project Banner" width="800"/>
+  <img src="./src/assets/projectBanner.jpg" alt="Project Banner" width="800"/>
 </div>
 
 <p align="center">
