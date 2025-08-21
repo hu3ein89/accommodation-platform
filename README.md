@@ -1,4 +1,4 @@
-# HotelYar - پلتفرم جامع رزرواسیون اقامتگاه
+<h1 align="center">پلتفرم جامع رزرواسیون اقامتگاه<br>HotelYar</h1>
 
 <div align="center">
   <img src="./src/assets/projectBanner.jpg" alt="Project Banner" width="800"/>
@@ -56,7 +56,7 @@ As a frontend developer, I took on the challenge of designing and implementing t
 
 1.  **Clone the repo**
     ```sh
-    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+    git clone https://github.com/hu3ein89/accommodation-platform.git
     ```
 2.  **Install NPM packages**
     ```sh
@@ -65,13 +65,14 @@ As a frontend developer, I took on the challenge of designing and implementing t
 3.  **Set up Environment Variables**
     Create a `.env` file in the root and add the following keys:
     ```env
-    VITE_SUPABASE_URL=YOUR_SUPABASE_PROJECT_URL
-    VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+    VITE_SUPABASE_URL=[YOUR_SUPABASE_PROJECT_URL](https://waayniecnqytgflijiqo.supabase.co)
+    VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhYXluaWVjbnF5dGdmbGlqaXFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ3NjYxMzUsImV4cCI6MjA3MDM0MjEzNX0.i9oGEXesR_iJCdk_42L9I7MkiQboOubEpl1BPJ-CT4k
+    
     VITE_FRONTEND_URL=http://localhost:5173
     ```
 4.  **Run the development server**
     ```sh
-    npm run dev
+    npm run devrun dev
     ```
 <br/>
 <hr/>
