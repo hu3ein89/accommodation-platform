@@ -5,7 +5,7 @@ import { UserOutlined, MailOutlined, LockOutlined, PhoneOutlined } from '@ant-de
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../context/AuthContext';
 import { createUser } from '../../api/jsonServer';
-import { hashPassword, validatePasswordStrength } from '../../utils/authHelper';
+import {validatePasswordStrength } from '../../utils/authHelper';
 import Navbar from '../Layout/Navbar';
 import '../../styles/Auth.css';
 import { useNotification } from '../../context/NotificationContext';
