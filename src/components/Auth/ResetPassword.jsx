@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Card, Layout, Row, Col, Alert, Typography, Progress, Space } from 'antd';
 import { LockOutlined, EyeInvisibleOutlined, EyeTwoTone, CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { resetPassword } from '../../services/authService'; 
-import Navbar from '../Layout/Navbar';
-import '../../styles/Auth.css';
 import { validatePasswordStrength } from '../../utils/authHelper';
 
 const { Content } = Layout;
@@ -14,19 +10,8 @@ const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [token, setToken] = useState(null);
   const [passwordStrength, setPasswordStrength] = useState({ isValid: false, requirements: null });
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const [form] = Form.useForm();
-
-  useEffect(() => {
-    const resetToken = searchParams.get('token');
-    if (!resetToken) {
-      setError('لینک بازنشانی رمز عبور نامعتبر است');
-    }
-    setToken(resetToken);
-  }, [searchParams]);
 
   const handlePasswordChange = (e) => {
     const password = e.target.value;
@@ -72,17 +57,12 @@ const ResetPassword = () => {
         return;
       }
       
-      await resetPassword(token, values.password);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
       setSuccess(true);
-
-      setTimeout(() => {
-        navigate('/login', {
-          state: { message: 'رمز عبور شما با موفقیت تغییر یافت', type: 'success' }
-        });
-      }, 3000);
     } catch (err) {
       console.error('Password reset error:', err);
-      setError(err.message || 'خطا در تغییر رمز عبور');
+      setError('خطا در تغییر رمز عبور');
     } finally {
       setLoading(false);
     }
@@ -100,138 +80,181 @@ const ResetPassword = () => {
   );
 
   return (
-    <Layout className="layout">
-      <Navbar />
+    <Layout style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' }}>
       <Content>
-        <div className="auth-page">
-          <Row justify="center" align="middle" className="auth-container">
-            <Col xs={22} sm={16} md={12} lg={8}>
-              <Card bordered={false} className="auth-card">
-                <Title level={2} className="auth-title">تغییر رمز عبور</Title>
-                {success ? (
-                  <Alert
-                    message="رمز عبور با موفقیت تغییر کرد"
-                    description="در حال انتقال به صفحه ورود..."
-                    type="success"
-                    showIcon
-                  />
-                ) : (
-                  <>
-                    {error && (
-                      <Alert
-                        message={error}
-                        type="error"
-                        showIcon
-                        closable
-                        onClose={() => setError(null)}
-                        style={{ marginBottom: 24 }}
-                      />
-                    )}
-                    <Form 
-                      form={form}
-                      name="reset_password" 
-                      onFinish={onFinish} 
-                      layout="vertical"
+        <Row justify="center" align="middle" style={{ height: '100vh', padding: '16px' }}>
+          <Col xs={24} sm={20} md={16} lg={12} xl={8}>
+            <Card 
+              bordered={false} 
+              style={{
+                borderRadius: '12px',
+                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+                padding: '24px'
+              }}
+            >
+              <Title 
+                level={2} 
+                style={{ 
+                  textAlign: 'center', 
+                  marginBottom: '24px',
+                  color: '#1890ff'
+                }}
+              >
+                تغییر رمز عبور
+              </Title>
+              
+              {success ? (
+                <Alert
+                  message="رمز عبور با موفقیت تغییر کرد"
+                  description="اکنون می‌توانید با رمز عبور جدید وارد شوید"
+                  type="success"
+                  showIcon
+                  style={{ marginBottom: 24 }}
+                />
+              ) : (
+                <>
+                  {error && (
+                    <Alert
+                      message={error}
+                      type="error"
+                      showIcon
+                      closable
+                      onClose={() => setError(null)}
+                      style={{ marginBottom: 24 }}
+                    />
+                  )}
+                  <Form 
+                    form={form}
+                    name="reset_password" 
+                    onFinish={onFinish} 
+                    layout="vertical"
+                  >
+                    <Form.Item 
+                      name="password"
+                      label="رمز عبور جدید"
+                      rules={[
+                        { required: true, message: 'لطفاً رمز عبور جدید را وارد کنید' },
+                        () => ({
+                          validator(_, value) {
+                            if (!value || validatePasswordStrength(value).isValid) {
+                              return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('لطفاً یک رمز عبور قوی‌تر انتخاب کنید'));
+                          },
+                        }),
+                      ]}
                     >
-                      <Form.Item 
-                        name="password"
-                        label="رمز عبور جدید"
-                        rules={[
-                          { required: true, message: 'لطفاً رمز عبور جدید را وارد کنید' },
-                          () => ({
-                            validator(_, value) {
-                              if (!value || validatePasswordStrength(value).isValid) {
-                                return Promise.resolve();
-                              }
-                              return Promise.reject(new Error('لطفاً یک رمز عبور قوی‌تر انتخاب کنید'));
-                            },
-                          }),
-                        ]}
-                      >
-                        <Input.Password 
-                          prefix={<LockOutlined />} 
-                          placeholder="رمز عبور جدید" 
-                          size="large" 
-                          iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                          onChange={handlePasswordChange}
+                      <Input.Password 
+                        prefix={<LockOutlined />} 
+                        placeholder="رمز عبور جدید" 
+                        size="large" 
+                        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                        onChange={handlePasswordChange}
+                        style={{ borderRadius: '6px' }}
+                      />
+                    </Form.Item>
+                    
+                    {passwordStrength.requirements && (
+                      <div style={{ marginBottom: 16 }}>
+                        <Text strong>قدرت رمز عبور:</Text>
+                        <Progress 
+                          percent={calculatePasswordStrengthScore(form.getFieldValue('password'))} 
+                          showInfo={false} 
+                          strokeColor={getPasswordStrengthColor(
+                            calculatePasswordStrengthScore(form.getFieldValue('password'))
+                          )}
+                          size="small"
                         />
-                      </Form.Item>
-                      
-                      {passwordStrength.requirements && (
-                        <div style={{ marginBottom: 16 }}>
-                          <Text strong>قدرت رمز عبور:</Text>
-                          <Progress 
-                            percent={calculatePasswordStrengthScore(form.getFieldValue('password'))} 
-                            showInfo={false} 
-                            strokeColor={getPasswordStrengthColor(
-                              calculatePasswordStrengthScore(form.getFieldValue('password'))
-                            )}
-                            size="small"
-                          />
-                          
-                          <Space direction="vertical" size={0} style={{ marginTop: 8 }}>
-                            <RequirementItem met={form.getFieldValue('password')?.length >= 8}>
-                              حداقل ۸ کاراکتر
-                            </RequirementItem>
-                            <RequirementItem met={passwordStrength.requirements.hasUpperCase}>
-                              دارای حروف بزرگ (A-Z)
-                            </RequirementItem>
-                            <RequirementItem met={passwordStrength.requirements.hasLowerCase}>
-                              دارای حروف کوچک (a-z)
-                            </RequirementItem>
-                            <RequirementItem met={passwordStrength.requirements.hasNumber}>
-                              دارای اعداد (0-9)
-                            </RequirementItem>
-                            <RequirementItem met={passwordStrength.requirements.hasSpecialChar}>
-                              دارای کاراکترهای خاص (!@#$%^&*)
-                            </RequirementItem>
-                          </Space>
-                        </div>
-                      )}
-                      
-                      <Form.Item 
-                        name="confirmPassword"
-                        label="تکرار رمز عبور جدید"
-                        rules={[
-                          { required: true, message: 'لطفاً تکرار رمز عبور را وارد کنید' },
-                          ({ getFieldValue }) => ({
-                            validator(_, value) {
-                              if (!value || getFieldValue('password') === value) {
-                                return Promise.resolve();
-                              }
-                              return Promise.reject(new Error('رمزهای عبور مطابقت ندارند'));
-                            },
-                          }),
-                        ]}
-                        dependencies={['password']}
+                        
+                        <Space direction="vertical" size={0} style={{ marginTop: 8 }}>
+                          <RequirementItem met={form.getFieldValue('password')?.length >= 8}>
+                            حداقل ۸ کاراکتر
+                          </RequirementItem>
+                          <RequirementItem met={passwordStrength.requirements.hasUpperCase}>
+                            دارای حروف بزرگ (A-Z)
+                          </RequirementItem>
+                          <RequirementItem met={passwordStrength.requirements.hasLowerCase}>
+                            دارای حروف کوچک (a-z)
+                          </RequirementItem>
+                          <RequirementItem met={passwordStrength.requirements.hasNumber}>
+                            دارای اعداد (0-9)
+                          </RequirementItem>
+                          <RequirementItem met={passwordStrength.requirements.hasSpecialChar}>
+                            دارای کاراکترهای خاص (!@#$%^&*)
+                          </RequirementItem>
+                        </Space>
+                      </div>
+                    )}
+                    
+                    <Form.Item 
+                      name="confirmPassword"
+                      label="تکرار رمز عبور جدید"
+                      rules={[
+                        { required: true, message: 'لطفاً تکرار رمز عبور را وارد کنید' },
+                        ({ getFieldValue }) => ({
+                          validator(_, value) {
+                            if (!value || getFieldValue('password') === value) {
+                              return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('رمزهای عبور مطابقت ندارند'));
+                          },
+                        }),
+                      ]}
+                      dependencies={['password']}
+                    >
+                      <Input.Password 
+                        prefix={<LockOutlined />} 
+                        placeholder="تکرار رمز عبور جدید" 
+                        size="large"
+                        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                        style={{ borderRadius: '6px' }}
+                      />
+                    </Form.Item>
+                    <Form.Item>
+                      <Button 
+                        type="primary" 
+                        htmlType="submit" 
+                        loading={loading} 
+                        block 
+                        size="large"
+                        style={{
+                          height: '48px',
+                          borderRadius: '6px',
+                          fontSize: '16px',
+                          fontWeight: 'bold'
+                        }}
                       >
-                        <Input.Password 
-                          prefix={<LockOutlined />} 
-                          placeholder="تکرار رمز عبور جدید" 
-                          size="large"
-                          iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                        />
-                      </Form.Item>
-                      <Form.Item>
-                        <Button 
-                          type="primary" 
-                          htmlType="submit" 
-                          loading={loading} 
-                          block 
-                          size="large"
-                          disabled={!token}
-                        >
-                          تغییر رمز عبور
-                        </Button>
-                      </Form.Item>
-                    </Form>
-                  </>
-                )}
-              </Card>
-            </Col>
-          </Row>
-        </div>
+                        تغییر رمز عبور
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </>
+              )}
+            </Card>
+          </Col>
+        </Row>
       </Content>
+      
+      <style>
+        {`
+          .ant-input-affix-wrapper {
+            direction: rtl;
+          }
+          .ant-input-prefix {
+            margin-right: 0;
+            margin-left: 8px;
+          }
+          .ant-form-item-label {
+            text-align: right;
+          }
+          .ant-form-item-label > label {
+            font-weight: bold;
+          }
+          .ant-card-body {
+            padding: 32px;
+          }
+        `}
+      </style>
     </Layout>
   );
 };
