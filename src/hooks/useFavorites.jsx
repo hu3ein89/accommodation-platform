@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {
   getUserFavorites,
   toggleFavorite as apiToggleFavorite
-} from '../api/jsonServer';
+} from '../api/data';
 
 export const useFavorites = (user_id) => {
   const [favorites, setFavorites] = useState([]);

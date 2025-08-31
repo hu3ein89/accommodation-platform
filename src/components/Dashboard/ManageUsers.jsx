@@ -25,7 +25,7 @@ import {
     SearchOutlined
 } from "@ant-design/icons";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchUsers, updateUser, deleteUser } from "../../api/jsonServer";
+import { fetchUsers, updateUser, deleteUser } from "../../api/data";
 
 const { Option } = Select;
 const { Text } = Typography;

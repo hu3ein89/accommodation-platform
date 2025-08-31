@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Layout, Row, Col, Card, Button, Alert, Statistic, Divider, Typography } from 'antd';
 import styled from 'styled-components';
 
-import { createReservationWithTransaction } from '../api/jsonServer';
+import { createReservationWithTransaction } from '../api/data';
 import { useNotification } from '../context/NotificationContext';
 import Navbar from '../components/Layout/Navbar';
 import CustomPaymentForm from '../components/payment/CustomPaymentForm';

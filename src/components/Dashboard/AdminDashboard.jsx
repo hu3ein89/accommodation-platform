@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import styled from "styled-components";
 
-import { fetchReservations, fetchNotifications, fetchUsers, fetchHotels, fetchPrivateMessages } from "../../api/jsonServer";
+import { fetchReservations, fetchNotifications, fetchUsers, fetchHotels, fetchPrivateMessages } from "../../api/data";
 import ManageUsers from './ManageUsers';
 import ManageHotels from './ManageHotels';
 import ManageBookings from './ManageBookings';

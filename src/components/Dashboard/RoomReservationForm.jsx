@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import fa_IR from 'antd/locale/fa_IR';
 import dayjs from 'dayjs';
 import { formatDateForDB } from '../../utils/dateUtils';
-import { fetchHotels, fetchReservations } from '../../api/jsonServer';
+import { fetchHotels, fetchReservations } from '../../api/data';
 import { useAuth } from '../../context/AuthContext';
 import { useNotification } from '../../context/NotificationContext';
 import { CalendarOutlined, InfoCircleOutlined, MoneyCollectOutlined, UserOutlined } from '@ant-design/icons';

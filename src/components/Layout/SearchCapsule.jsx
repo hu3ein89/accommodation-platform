@@ -4,7 +4,7 @@ import { DatePicker as DatePickerJalali, JalaliLocaleListener } from 'antd-jalal
 import { MoneyCollectOutlined } from '@ant-design/icons';
 import { useAuth } from '../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
-import { fetchHotels, fetchReservations } from '../../api/jsonServer';
+import { fetchHotels, fetchReservations } from '../../api/data';
 import { useNotification } from '../../context/NotificationContext';
 import fa_IR from 'antd/locale/fa_IR';
 import { useNavigate } from 'react-router-dom';

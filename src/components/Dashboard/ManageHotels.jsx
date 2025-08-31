@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { Modal, Form, Input, Button, notification, Space, Select, Upload, Rate, Row, Col, Popconfirm, InputNumber, Card, Avatar, List } from "antd";
 import { PlusOutlined, LoadingOutlined, EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { createHotel, fetchHotels, deleteHotel } from "../../api/jsonServer";
+import { createHotel, fetchHotels, deleteHotel } from "../../api/data";
 import styled from "styled-components";
 
 const { Option } = Select;

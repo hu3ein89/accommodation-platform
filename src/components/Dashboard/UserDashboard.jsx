@@ -26,7 +26,7 @@ import {
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { fetchUserReservations } from "../../api/jsonServer";
+import { fetchUserReservations } from "../../api/data";
 import RoomReservationForm from "./RoomReservationForm";
 import ReservationList from "./ReservationList";
 import HotelComparison from "./HotelComparison";

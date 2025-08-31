@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Select, Table, Rate, Button, Space, Empty, notification, Row, Col, Statistic, Form, Tag } from 'antd';
 import { useQuery } from '@tanstack/react-query';
-import { fetchHotels, fetchReservations } from '../../api/jsonServer';
+import { fetchHotels, fetchReservations } from '../../api/data';
 import {
   SwapOutlined,
   BookOutlined

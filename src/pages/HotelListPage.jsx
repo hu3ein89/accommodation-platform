@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { SearchOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
-import { fetchHotels } from '../api/jsonServer';
+import { fetchHotels } from '../api/data';
 import Navbar from '../components/Layout/Navbar';
 import HotelListItem from '../components/hotels/HotelListItem';
 

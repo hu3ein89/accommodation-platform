@@ -27,7 +27,7 @@ import Navbar from '../components/Layout/Navbar';
 import Footer from '../components/Layout/Footer';
 import { useNotification } from '../context/NotificationContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { sendPrivateMessage } from '../api/jsonServer';
+import { sendPrivateMessage } from '../api/data';
 import { useAuth } from '../context/AuthContext';
 
 const { Title, Text, Paragraph } = Typography;

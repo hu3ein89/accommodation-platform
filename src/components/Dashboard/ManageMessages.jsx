@@ -28,7 +28,7 @@ import {
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 
-import { fetchPrivateMessages, updatePrivateMessageStatus, deletePrivateMessage } from '../../api/jsonServer';
+import { fetchPrivateMessages, updatePrivateMessageStatus, deletePrivateMessage } from '../../api/data';
 import { useNotification } from '../../context/NotificationContext';
 
 const { Title, Text, Paragraph } = Typography;

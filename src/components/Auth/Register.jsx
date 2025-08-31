@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserOutlined, MailOutlined, LockOutlined, PhoneOutlined } from '@ant-design/icons';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../context/AuthContext';
-import { createUser } from '../../api/jsonServer';
+import { createUser } from '../../api/data';
 import {validatePasswordStrength } from '../../utils/authHelper';
 import Navbar from '../Layout/Navbar';
 import '../../styles/Auth.css';

@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { HomeOutlined, ShopOutlined, EnvironmentOutlined, GiftOutlined, BankOutlined, CompassOutlined } from '@ant-design/icons';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { fetchHotels }from '../api/jsonServer';
+import { fetchHotels }from '../api/data';
 import Navbar from '../components/Layout/Navbar';
 import HotelCard from '../components/HotelCard';
 import HeroSection from '../components/Layout/HeroSection';

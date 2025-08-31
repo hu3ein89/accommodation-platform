@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, notification, Tabs, Upload, Space, Select, Card, Empty, Spin, Alert, Popconfirm, Image as AntdImage, Row, Col, Rate, InputNumber, Collapse, Typography, Tag } from 'antd';
 import { PlusOutlined, ArrowRightOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchHotelDetails, updateHotel, fetchHotels } from '../../api/jsonServer';
+import { fetchHotelDetails, updateHotel, fetchHotels } from '../../api/data';
 import styled from 'styled-components';
 import { supabase } from '../../services/supabaseClient';
 

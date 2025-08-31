@@ -1,13 +1,6 @@
-import axios from 'axios';
 import { getDaysDifference, getNowJalali, smartDateParser } from '../utils/dateUtils';
 import { supabase, supabaseAdmin } from '../services/supabaseClient';
 import { formatPhoneToE164 } from '../services/phoneFormatter';
-
-const API_URL = '/api';
-const apiClient = axios.create({ baseURL: API_URL });
-
-
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const generateUniqueId = (prefix = '') => {
   const timestamp = Date.now().toString(36);

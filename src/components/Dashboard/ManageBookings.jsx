@@ -17,7 +17,7 @@ import {
 } from "antd";
 import { EditOutlined, DeleteOutlined, ReloadOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateReservationStatus, deleteReservation, createTransaction, fetchReservations } from "../../api/jsonServer";
+import { updateReservationStatus, deleteReservation, createTransaction, fetchReservations } from "../../api/data";
 import { STATUS_CONFIG } from "../../constants/index";
 import { useNotification } from "../../context/NotificationContext";
 import { supabase } from "../../services/supabaseClient";

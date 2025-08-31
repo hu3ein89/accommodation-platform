@@ -9,7 +9,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { useAuth } from '../../context/AuthContext';
 import { useNotification } from '../../context/NotificationContext';
-import { fetchCommentsForHotel, sendMessage } from '../../api/jsonServer';
+import { fetchCommentsForHotel, sendMessage } from '../../api/data';
 
 dayjs.extend(relativeTime);
 dayjs.locale('fa');

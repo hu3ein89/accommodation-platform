@@ -4,7 +4,7 @@ import { useFavorites } from "../../hooks/useFavorites";
 import { useAuth } from "../../context/AuthContext";
 
 import HotelCard from '../HotelCard';
-import { fetchHotelDetails } from '../../api/jsonServer'; 
+import { fetchHotelDetails } from '../../api/data'; 
 import { useEffect,useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

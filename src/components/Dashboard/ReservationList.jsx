@@ -26,7 +26,7 @@ import {
   updateReservation,
   fetchTransactionsForReservation,
   fetchUserReservations
-} from "../../api/jsonServer";
+} from "../../api/data";
 import "../../styles/ReservationList.css";
 import { STATUS_CONFIG } from "../../constants/index";
 import {

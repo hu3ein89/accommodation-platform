@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { notification } from 'antd';
 import { AuthContext } from '../context/AuthContext';
-import { getUserByEmail, updateUserLogin } from '../api/jsonServer';
+import { getUserByEmail, updateUserLogin } from '../api/data';
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

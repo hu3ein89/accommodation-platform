@@ -17,7 +17,7 @@ import {
   Legend, 
   ResponsiveContainer 
 } from 'recharts';
-import { fetchAllTransactions, fetchReservations } from '../../api/jsonServer';
+import { fetchAllTransactions, fetchReservations } from '../../api/data';
 import { JalaliLocaleListener } from 'antd-jalali';
 import fa_IR from 'antd/locale/fa_IR';
 

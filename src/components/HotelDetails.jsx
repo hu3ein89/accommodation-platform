@@ -5,7 +5,7 @@ import { Layout, Row, Col, Typography, Rate, Button, Space, Tag, Spin, Alert, Im
 import { EnvironmentOutlined, ShareAltOutlined, HeartOutlined, HeartFilled } from '@ant-design/icons';
 import styled from 'styled-components';
 
-import { fetchHotelDetails } from '../api/jsonServer';
+import { fetchHotelDetails } from '../api/data';
 import { useAuth } from '../context/AuthContext';
 import { useNotification } from '../context/NotificationContext';
 import RoomReservationForm from './Dashboard/RoomReservationForm';
