@@ -24,10 +24,6 @@ const StyledCard = styled(Card)`
     }
   }
 
-  Button {
-
-  }
-  
   .ant-card-body {
     flex-grow: 1;
     padding: 20px;
@@ -88,7 +84,7 @@ const CardContent = styled.div`
   flex-grow: 1;
 `;
 
-const HotelCard = ({ hotel, onViewDetails, actions, facilities = []}) => {
+const HotelCard = ({ hotel, onViewDetails = []}) => {
  const {user} = useAuth()
  const { toggleFavorite, isFavorite } = useFavorites(user?.id);
 
@@ -148,9 +144,9 @@ const HotelCard = ({ hotel, onViewDetails, actions, facilities = []}) => {
 
       <CardContent>
         <Title level={5} ellipsis={{ rows: 1 }}>{hotel.name}</Title>
-        {hotel.location?.city && (
+        {hotel.city && (
           <Typography.Text type="secondary" style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '8px' }}>
-            <EnvironmentOutlined /> {hotel.location.city}
+            <EnvironmentOutlined /> {hotel.city}
           </Typography.Text>
         )}
         <Rate allowHalf disabled defaultValue={hotel.rating} style={{ fontSize: '16px' }} />
